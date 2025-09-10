@@ -1,12 +1,9 @@
 package com.example.laundryyuk.adapter;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laundryyuk.databinding.ListMenuBinding;
@@ -33,9 +30,8 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.MyView
     public void onBindViewHolder(@NonNull MainMenuAdapter.MyViewHolder holder, int position) {
         MainMenuItem item = mainMenuItems.get(position);
         holder.binding.llCardMenu.setBackgroundResource(item.getColor());
-        holder.binding.imgMenuIcon.setImageResource(item.getImage1());
+        holder.binding.imgMenuIcon.setImageResource(item.getImage());
         holder.binding.txtMenuTitle.setText(item.getTitle());
-        holder.binding.imgMenuIcon2.setImageResource(item.getImage2());
     }
 
     @Override

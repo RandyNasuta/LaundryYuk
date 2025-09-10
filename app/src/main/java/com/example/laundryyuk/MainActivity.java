@@ -1,21 +1,21 @@
 package com.example.laundryyuk;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.laundryyuk.adapter.MainMenuAdapter;
 import com.example.laundryyuk.databinding.ActivityMainBinding;
-import com.example.laundryyuk.model.MainMenuItem;
-
-import java.util.ArrayList;
+import com.example.laundryyuk.fragment.HomeFragment;
+import com.example.laundryyuk.fragment.NotificationFragment;
+import com.example.laundryyuk.fragment.ProfileFragment;
+import com.google.android.material.navigation.NavigationBarView;
+import com.example.laundryyuk.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,37 +28,28 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        ArrayList<MainMenuItem> items = new ArrayList<>();
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+              replaceFragment(new HomeFragment());
+              return true;
+            } else if (item.getItemId() == R.id.notification) {
+                replaceFragment(new NotificationFragment());
+                return true;
+            } else if (item.getItemId() == R.id.profile) {
+                replaceFragment(new ProfileFragment());
+                return true;
+            }
+            return false;
+        });
 
-        items.add(
-                new MainMenuItem(
-                        R.color.pink,
-                        "Laundry",
-                        R.drawable.laundry_svg,
-                        R.drawable.laundry_image
-                )
-        );
+    }
 
-        items.add(
-                new MainMenuItem(
-                        R.color.blue,
-                        "Riwayat",
-                        R.drawable.gui_history_svg,
-                        R.drawable.laundry_image
-                )
-        );
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        items.add(
-                new MainMenuItem(
-                        R.color.yellow,
-                        "Laporan",
-                        R.drawable.open_book_svg,
-                        R.drawable.laundry_image
-                )
-        );
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        binding.rvMenu.setLayoutManager(new LinearLayoutManager(this));
-        MainMenuAdapter adapter = new MainMenuAdapter(items);
-        binding.rvMenu.setAdapter(adapter);
+        fragmentTransaction.replace(R.id.fragmentMain, fragment);
+        fragmentTransaction.commit();
     }
 }

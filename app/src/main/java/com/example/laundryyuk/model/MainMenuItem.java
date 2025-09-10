@@ -3,14 +3,12 @@ package com.example.laundryyuk.model;
 public class MainMenuItem {
     private int color;
     private String title;
-    private int image1;
-    private int image2;
+    private int image;
 
-    public MainMenuItem(int color, String title, int image1, int image2) {
+    public MainMenuItem(int color, String title, int image) {
         this.color = color;
         this.title = title;
-        this.image1 = image1;
-        this.image2 = image2;
+        this.image = image;
     }
 
     public int getColor() {
@@ -29,19 +27,11 @@ public class MainMenuItem {
         this.title = title;
     }
 
-    public int getImage1() {
-        return image1;
+    public int getImage() {
+        return image;
     }
 
-    public void setImage1(int image1) {
-        this.image1 = image1;
-    }
-
-    public int getImage2() {
-        return image2;
-    }
-
-    public void setImage2(int image2) {
-        this.image2 = image2;
+    public void setImage(int image) {
+        this.image = image;
     }
 }
